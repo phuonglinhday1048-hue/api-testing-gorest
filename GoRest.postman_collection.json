@@ -2,9 +2,7 @@
   "info": {
     "_postman_id": "fcfbe7f6-f05d-461c-8182-bc56b7d7c67e",
     "name": "2474802010559_Dang Ngoc Phuong Linh_GoRest",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "_exporter_id": "59052179",
-    "_collection_link": "https://go.postman.co/collection/59052179-fcfbe7f6-f05d-461c-8182-bc56b7d7c67e?source=collection_link"
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "item": [
     {
@@ -18,7 +16,12 @@
               "script": {
                 "type": "text/javascript",
                 "exec": [
-                  "pm.test(\"Status code is 201 Created\", function () {\r\n    pm.response.to.have.status(201);\r\n});\r\n\r\n// Lưu lại ID và Email của User cuối cùng tạo thành công để dùng cho Request 2, 3, 4, 6, 7\r\nvar resData = pm.response.json();\r\npm.collectionVariables.set(\"user_id\", resData.id);\r\npm.collectionVariables.set(\"user_email\", resData.email);"
+                  "pm.test(\"Status code is 201 Created\", function () {",
+                  "    pm.response.to.have.status(201);",
+                  "});",
+                  "var resData = pm.response.json();",
+                  "pm.collectionVariables.set(\"user_id\", resData.id);",
+                  "pm.collectionVariables.set(\"user_email\", resData.email);"
                 ]
               }
             }
@@ -28,7 +31,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n  \"name\": \"{{name}}\",\r\n  \"gender\": \"{{gender}}\",\r\n  \"email\": \"{{email}}\",\r\n  \"status\": \"{{status}}\"\r\n}",
+              "raw": "{\n  \"name\": \"{{name}}\",\n  \"gender\": \"{{gender}}\",\n  \"email\": \"{{email}}\",\n  \"status\": \"{{status}}\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -38,16 +41,8 @@
             "url": {
               "raw": "https://gorest.co.in/public/v2/users",
               "protocol": "https",
-              "host": [
-                "gorest",
-                "co",
-                "in"
-              ],
-              "path": [
-                "public",
-                "v2",
-                "users"
-              ]
+              "host": ["gorest", "co", "in"],
+              "path": ["public", "v2", "users"]
             }
           },
           "response": []
@@ -59,19 +54,15 @@
               "listen": "test",
               "script": {
                 "exec": [
-                  "pm.test(\"Status code is 200 OK\", function () {\r",
-                  "    pm.response.to.have.status(200);\r",
-                  "});\r",
-                  "\r",
-                  "// Verify ID trùng khớp\r",
-                  "pm.test(\"Verify User ID matches\", function () {\r",
-                  "    var resData = pm.response.json();\r",
-                  "    pm.expect(resData.id).to.eql(pm.collectionVariables.get(\"user_id\"));\r",
+                  "pm.test(\"Status code is 200 OK\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test(\"Verify User ID matches\", function () {",
+                  "    var resData = pm.response.json();",
+                  "    pm.expect(resData.id).to.eql(pm.collectionVariables.get(\"user_id\"));",
                   "});"
                 ],
-                "type": "text/javascript",
-                "packages": {},
-                "requests": {}
+                "type": "text/javascript"
               }
             }
           ],
@@ -79,19 +70,10 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "https://gorest.co.in/public/v2/users/",
+              "raw": "https://gorest.co.in/public/v2/users/{{user_id}}",
               "protocol": "https",
-              "host": [
-                "gorest",
-                "co",
-                "in"
-              ],
-              "path": [
-                "public",
-                "v2",
-                "users",
-                ""
-              ]
+              "host": ["gorest", "co", "in"],
+              "path": ["public", "v2", "users", "{{user_id}}"]
             }
           },
           "response": []
@@ -103,19 +85,15 @@
               "listen": "test",
               "script": {
                 "exec": [
-                  "pm.test(\"Status code is 200 OK\", function () {\r",
-                  "    pm.response.to.have.status(200);\r",
-                  "});\r",
-                  "\r",
-                  "// Verify status đã chuyển sang inactive\r",
-                  "pm.test(\"Verify status updated to inactive\", function () {\r",
-                  "    var resData = pm.response.json();\r",
-                  "    pm.expect(resData.status).to.eql(\"inactive\");\r",
+                  "pm.test(\"Status code is 200 OK\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "pm.test(\"Verify status updated to inactive\", function () {",
+                  "    var resData = pm.response.json();",
+                  "    pm.expect(resData.status).to.eql(\"inactive\");",
                   "});"
                 ],
-                "type": "text/javascript",
-                "packages": {},
-                "requests": {}
+                "type": "text/javascript"
               }
             }
           ],
@@ -124,7 +102,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n  \"status\": \"inactive\"\r\n}",
+              "raw": "{\n  \"status\": \"inactive\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -132,19 +110,10 @@
               }
             },
             "url": {
-              "raw": "https://gorest.co.in/public/v2/users/",
+              "raw": "https://gorest.co.in/public/v2/users/{{user_id}}",
               "protocol": "https",
-              "host": [
-                "gorest",
-                "co",
-                "in"
-              ],
-              "path": [
-                "public",
-                "v2",
-                "users",
-                ""
-              ]
+              "host": ["gorest", "co", "in"],
+              "path": ["public", "v2", "users", "{{user_id}}"]
             }
           },
           "response": []
@@ -156,13 +125,11 @@
               "listen": "test",
               "script": {
                 "exec": [
-                  "pm.test(\"Status code is 204 No Content\", function () {\r",
-                  "    pm.response.to.have.status(204);\r",
+                  "pm.test(\"Status code is 204 No Content\", function () {",
+                  "    pm.response.to.have.status(204);",
                   "});"
                 ],
-                "type": "text/javascript",
-                "packages": {},
-                "requests": {}
+                "type": "text/javascript"
               }
             }
           ],
@@ -170,19 +137,10 @@
             "method": "DELETE",
             "header": [],
             "url": {
-              "raw": "https://gorest.co.in/public/v2/users/",
+              "raw": "https://gorest.co.in/public/v2/users/{{user_id}}",
               "protocol": "https",
-              "host": [
-                "gorest",
-                "co",
-                "in"
-              ],
-              "path": [
-                "public",
-                "v2",
-                "users",
-                ""
-              ]
+              "host": ["gorest", "co", "in"],
+              "path": ["public", "v2", "users", "{{user_id}}"]
             }
           },
           "response": []
@@ -194,59 +152,27 @@
               "listen": "test",
               "script": {
                 "exec": [
-                  "// Verify Status 404 Not Found (Báo user không còn tồn tại)\r",
-                  "pm.test(\"Status code is 404 Not Found\", function () {\r",
-                  "    pm.response.to.have.status(404);\r",
+                  "pm.test(\"Status code is 404 Not Found\", function () {",
+                  "    pm.response.to.have.status(404);",
                   "});"
                 ],
-                "type": "text/javascript",
-                "packages": {},
-                "requests": {}
+                "type": "text/javascript"
               }
             }
           ],
           "request": {
-            "auth": {
-              "type": "bearer",
-              "bearer": [
-                {
-                  "key": "token",
-                  "value": "{{auth_secret_0ly6}}",
-                  "type": "string"
-                }
-              ]
-            },
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "https://gorest.co.in/public/v2/users/",
+              "raw": "https://gorest.co.in/public/v2/users/{{user_id}}",
               "protocol": "https",
-              "host": [
-                "gorest",
-                "co",
-                "in"
-              ],
-              "path": [
-                "public",
-                "v2",
-                "users",
-                ""
-              ]
+              "host": ["gorest", "co", "in"],
+              "path": ["public", "v2", "users", "{{user_id}}"]
             }
           },
           "response": []
         }
-      ],
-      "auth": {
-        "type": "bearer",
-        "bearer": [
-          {
-            "key": "token",
-            "value": "6473e3f76dad5228cda6e62fac8b281d662ff39cf921c94c355ff95759692745",
-            "type": "string"
-          }
-        ]
-      }
+      ]
     },
     {
       "name": "Negative_Cases",
@@ -258,13 +184,11 @@
               "listen": "test",
               "script": {
                 "exec": [
-                  "pm.test(\"Status code is 401 Unauthorized\", function () {\r",
-                  "    pm.response.to.have.status(401);\r",
+                  "pm.test(\"Status code is 401 Unauthorized\", function () {",
+                  "    pm.response.to.have.status(401);",
                   "});"
                 ],
-                "type": "text/javascript",
-                "packages": {},
-                "requests": {}
+                "type": "text/javascript"
               }
             }
           ],
@@ -276,7 +200,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n  \"name\": \"Test No Token\",\r\n  \"gender\": \"male\",\r\n  \"email\": \"notoken_test123@gmail.com\",\r\n  \"status\": \"active\"\r\n}",
+              "raw": "{\n  \"name\": \"Test No Token\",\n  \"gender\": \"male\",\n  \"email\": \"notoken_test123@gmail.com\",\n  \"status\": \"active\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -286,16 +210,8 @@
             "url": {
               "raw": "https://gorest.co.in/public/v2/users",
               "protocol": "https",
-              "host": [
-                "gorest",
-                "co",
-                "in"
-              ],
-              "path": [
-                "public",
-                "v2",
-                "users"
-              ]
+              "host": ["gorest", "co", "in"],
+              "path": ["public", "v2", "users"]
             }
           },
           "response": []
@@ -307,36 +223,22 @@
               "listen": "test",
               "script": {
                 "exec": [
-                  "var jsonData = pm.response.json();\r",
-                  "\r",
-                  "pm.test(\"Error message is 'has already been taken'\", function () {\r",
-                  "    // Thêm [0] vì GoRest trả về mảng lỗi\r",
-                  "    var errorMessage = Array.isArray(jsonData) ? jsonData[0].message : jsonData.message;\r",
-                  "    pm.expect(errorMessage).to.equal(\"has already been taken\");\r",
+                  "var jsonData = pm.response.json();",
+                  "pm.test(\"Error message is 'has already been taken'\", function () {",
+                  "    var errorMessage = Array.isArray(jsonData) ? jsonData[0].message : jsonData.message;",
+                  "    pm.expect(errorMessage).to.equal(\"has already been taken\");",
                   "});"
                 ],
-                "type": "text/javascript",
-                "packages": {},
-                "requests": {}
+                "type": "text/javascript"
               }
             }
           ],
           "request": {
-            "auth": {
-              "type": "bearer",
-              "bearer": [
-                {
-                  "key": "token",
-                  "value": "{{auth_secret_0ly6}}",
-                  "type": "string"
-                }
-              ]
-            },
             "method": "POST",
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n  \"name\": \"Duplicate Email Test\",\r\n  \"gender\": \"female\",\r\n  \"email\": \"test.b.666@gmail.com\",\r\n  \"status\": \"active\"\r\n}",
+              "raw": "{\n  \"name\": \"Duplicate Email Test\",\n  \"gender\": \"female\",\n  \"email\": \"test.b.666@gmail.com\",\n  \"status\": \"active\"\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -346,43 +248,11 @@
             "url": {
               "raw": "https://gorest.co.in/public/v2/users",
               "protocol": "https",
-              "host": [
-                "gorest",
-                "co",
-                "in"
-              ],
-              "path": [
-                "public",
-                "v2",
-                "users"
-              ]
+              "host": ["gorest", "co", "in"],
+              "path": ["public", "v2", "users"]
             }
           },
           "response": []
-        }
-      ],
-      "event": [
-        {
-          "listen": "prerequest",
-          "script": {
-            "type": "text/javascript",
-            "packages": {},
-            "requests": {},
-            "exec": [
-              ""
-            ]
-          }
-        },
-        {
-          "listen": "test",
-          "script": {
-            "type": "text/javascript",
-            "packages": {},
-            "requests": {},
-            "exec": [
-              ""
-            ]
-          }
         }
       ]
     }
@@ -395,18 +265,6 @@
     {
       "key": "user_email",
       "value": ""
-    },
-    {
-      "key": "auth_secret_0ly6",
-      "secret": true,
-      "source": {
-        "provider": "postman",
-        "postman": {
-          "type": "cloud",
-          "secretId": "e6abdca5-3770-4b3e-915b-38fda38fd007",
-          "vaultId": "e4fc3a0c-8dc1-4845-af8b-53f2a308b1e6"
-        }
-      }
     }
   ]
 }
