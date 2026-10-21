@@ -21,7 +21,7 @@ jobs:
       - name: Install Newman
         run: npm install -g newman
 
-      - name: Run Monitoring Check (GET /users - Response time < 1500ms)
+      - name: Run Monitoring Check (GET /users - Response time < 800ms)
         env:
           TOKEN: ${{ secrets.GOREST_TOKEN }}
         run: |
