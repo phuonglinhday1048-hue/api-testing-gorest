@@ -1,0 +1,31 @@
+name: API Monitor (Shift-Right Testing)
+
+on:
+  schedule:
+    - cron: '0 * * * *' # Chạy mỗi giờ
+  workflow_dispatch: # Cho phép kích hoạt thủ công từ GitHub Actions
+
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install Newman
+        run: npm install -g newman
+
+      - name: Run Monitoring Check (GET /users - Response time < 800ms)
+        env:
+          TOKEN: ${{ secrets.GOREST_TOKEN }}
+        run: |
+          newman run goresto_collection.json \
+            --folder "Positive_Cases" \
+            --env-var "initial_token=$TOKEN" \
+            --bail
