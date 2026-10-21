@@ -25,7 +25,8 @@ jobs:
         env:
           TOKEN: ${{ secrets.GOREST_TOKEN }}
         run: |
-          newman run goresto_collection.json \
+          newman run GoRest.postman_collection.json \
+            -d users.csv \
             --folder "Positive_Cases" \
             --env-var "initial_token=$TOKEN" \
             --bail
